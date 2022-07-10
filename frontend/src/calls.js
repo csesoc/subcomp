@@ -149,8 +149,7 @@ const callSubmitProject = (
   repo,
   firstyear,
   postgrad,
-  zIDs,
-  category
+  zIDs
 ) => {
   return axios.post(
     "/api/submit_project/",
@@ -162,7 +161,6 @@ const callSubmitProject = (
       firstyear: firstyear,
       postgrad: postgrad,
       zids: zIDs,
-      category: category
     },
     {
       headers: {
@@ -179,8 +177,7 @@ const callEditProject = (
   repo,
   firstyear,
   postgrad,
-  zIDs,
-  category
+  zIDs
 ) => {
   return axios.post(
     "/api/edit_project/",
@@ -192,7 +189,6 @@ const callEditProject = (
       firstyear: firstyear,
       postgrad: postgrad,
       zids: zIDs,
-      category: category
     },
     {
       headers: {

@@ -493,6 +493,7 @@ pub fn submit_project(
             "votes": project.count_votes(&conn),
             "zids": project.get_zids(&conn),
             "names": project.get_names(&conn),
+            "category": project.category,
         },
     }))
 }
@@ -585,6 +586,7 @@ pub fn edit_project(user: User, project_data: Json<EditProjectData>, conn: Conn)
             "votes": project.count_votes(&conn),
             "zids": project.get_zids(&conn),
             "names": project.get_names(&conn),
+            "cateogry": project.category,
         },
     }))
 }

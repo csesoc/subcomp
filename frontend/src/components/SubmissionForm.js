@@ -61,7 +61,7 @@ const SubmissionForm = () => {
           zid: user.zid,
           name: user.name,
           votes: user.votes,
-          project_id: response.data.project.id,
+          project_id: response.data.project.id === null ? "" : response.data.project.id,
         });
       })
       .catch((error) => {
@@ -83,7 +83,7 @@ const SubmissionForm = () => {
       .then((response) => {
         setProjects(
           projects
-            .filter((project) => user.project_id!== null && project.id !== user.project_id)
+            .filter((project) => project.id !== user.project_id)
             .concat(response.data.project)
             .sort((a, b) => a.id > b.id)
         );

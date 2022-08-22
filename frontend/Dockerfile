@@ -5,9 +5,14 @@ ADD . /app
 RUN yarn install --production && \ 
     yarn build --production
 
-FROM node:alpine
-COPY --from=builder --chown=node:node /app/package*.json ./
-COPY --from=builder --chown=node:node /app/build/ build
-COPY --from=builder --chown=node:node /app/node_modules/ node_modules
-COPY --from=builder --chown=node:node /app/public/ public
-CMD yarn serve -s build
+FROM nginx:alpine
+
+WORKDIR /usr/share/nginx/html
+
+RUN rm -rf ./*
+
+COPY --from=builder /app/build .
+
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+ENTRYPOINT ["nginx", "-g", "daemon off;"]

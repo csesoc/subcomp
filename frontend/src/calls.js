@@ -132,6 +132,15 @@ const callUnvote = (project_id) => {
   );
 };
 
+const callHasVotedForCategory = (category) => {
+  console.log(`/api/has_voted?category=${category}`);
+  return axios.get(`/api/has_voted?category=${category}`, {
+    headers: {
+      Authorization: localStorage.getItem("token"),
+    }
+  });
+}
+
 const callCheckZid = (zID) => {
   return axios.post(
     "/api/check_zid/",
@@ -226,6 +235,7 @@ export {
   callUseReset,
   callVote,
   callUnvote,
+  callHasVotedForCategory,
   callCheckZid,
   callSubmitProject,
   callEditProject,

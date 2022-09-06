@@ -3,8 +3,9 @@ import { Alert } from "react-bootstrap";
 
 import { Context } from "../Context";
 
-const ProjectsNotice = () => {
-  const { user, projectDeadline, voteDeadline } = useContext(Context);
+const ProjectsNotice = ({ category }) => {
+  const { user, votes, projectDeadline, voteDeadline } = useContext(Context);
+  const numVotes = Object.values(votes).filter(value => value).length;
 
   return (
     <>
@@ -16,16 +17,20 @@ const ProjectsNotice = () => {
               {projectDeadline}. Voting closes on {voteDeadline}.
             </Alert>
           )}
-          {user !== null && user.votes.length < 3 && (
+          {user !== null && category === undefined && (
             <Alert className="m-3" variant="success">
-              You have {3 - user.votes.length} vote
-              {user.votes.length !== 2 && "s"} remaining. Voting closes on{" "}
+              You have {4 - numVotes} votes remaining. Voting closes on {voteDeadline}.
+            </Alert>
+          )}
+          {user !== null && category !== undefined && !votes[category] && (
+            <Alert className="m-3" variant="success">
+              You have not voted for this category. Voting closes on{" "}
               {voteDeadline}.
             </Alert>
           )}
-          {user !== null && user.votes.length >= 3 && (
+          {user !== null && category !== undefined && votes[category] && (
             <Alert className="m-3" variant="danger">
-              You have no more votes remaining.
+              You have no more votes remaining for this category.
             </Alert>
           )}
         </>

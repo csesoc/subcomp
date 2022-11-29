@@ -58,7 +58,7 @@ const SubmissionForm = () => {
           zid: user.zid,
           name: user.name,
           votes: user.votes,
-          project_id: response.data.project.id,
+          project_id: response.data.project.id === null ? "" : response.data.project.id,
         });
       })
       .catch((error) => {
